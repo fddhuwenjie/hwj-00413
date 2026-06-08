@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { Package, TrendingUp, CheckCircle, Clock, BarChart3, PieChart, TrendingUp as TrendingUpIcon } from 'lucide-react';
 import Layout from '../components/Layout';
@@ -50,6 +50,13 @@ export default function Dashboard() {
           statsService.getPopularItems(),
         ]);
 
+        console.log('Dashboard Data Loaded:', {
+          overview: overviewData,
+          categoryCount: categoryData.length,
+          trendCount: trendData.length,
+          popularCount: popularData.length,
+        });
+
         setOverview(overviewData);
         setCategoryDistribution(categoryData);
         setWeeklyTrend(trendData);
@@ -91,7 +98,7 @@ export default function Dashboard() {
     },
   ];
 
-  const pieChartOption = {
+  const pieChartOption = useMemo(() => ({
     tooltip: {
       trigger: 'item',
       formatter: '{b}: {c} ({d}%)',
@@ -141,9 +148,9 @@ export default function Dashboard() {
         color: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#06B6D4'],
       },
     ],
-  };
+  }), [categoryDistribution]);
 
-  const lineChartOption = {
+  const lineChartOption = useMemo(() => ({
     tooltip: {
       trigger: 'axis' as const,
       backgroundColor: 'rgba(255, 255, 255, 0.95)',
@@ -238,9 +245,9 @@ export default function Dashboard() {
         data: weeklyTrend.map((item) => item.count),
       },
     ],
-  };
+  }), [weeklyTrend]);
 
-  const barChartOption = {
+  const barChartOption = useMemo(() => ({
     tooltip: {
       trigger: 'axis' as const,
       axisPointer: {
@@ -322,7 +329,7 @@ export default function Dashboard() {
         data: popularItems.map((item) => item.viewCount),
       },
     ],
-  };
+  }), [popularItems]);
 
   if (loading) {
     return (
@@ -362,11 +369,14 @@ export default function Dashboard() {
               </div>
               <h2 className="text-lg font-semibold text-text-primary">各分类物品占比</h2>
             </div>
-            <div className="h-80">
+            <div className="h-80 w-full">
               {categoryDistribution.length > 0 ? (
                 <ReactECharts
+                  key={`pie-${categoryDistribution.length}-${categoryDistribution.map(c => c.count).join('-')}`}
                   option={pieChartOption}
-                  style={{ height: '100%', width: '100%' }}
+                  notMerge={true}
+                  lazyUpdate={false}
+                  style={{ height: '320px', width: '100%', minHeight: '320px' }}
                   opts={{ renderer: 'canvas' }}
                 />
               ) : (
@@ -384,11 +394,14 @@ export default function Dashboard() {
               </div>
               <h2 className="text-lg font-semibold text-text-primary">每周交换量趋势</h2>
             </div>
-            <div className="h-80">
+            <div className="h-80 w-full">
               {weeklyTrend.length > 0 ? (
                 <ReactECharts
+                  key={`line-${weeklyTrend.length}-${weeklyTrend.map(t => t.count).join('-')}`}
                   option={lineChartOption}
-                  style={{ height: '100%', width: '100%' }}
+                  notMerge={true}
+                  lazyUpdate={false}
+                  style={{ height: '320px', width: '100%', minHeight: '320px' }}
                   opts={{ renderer: 'canvas' }}
                 />
               ) : (
@@ -407,12 +420,15 @@ export default function Dashboard() {
             </div>
             <h2 className="text-lg font-semibold text-text-primary">热门交换物品类型 TOP10</h2>
           </div>
-          <div className="h-96">
+          <div className="h-96 w-full">
             {popularItems.length > 0 ? (
               <ReactECharts
                 ref={chartRef}
+                key={`bar-${popularItems.length}-${popularItems.map(p => p.viewCount).join('-')}`}
                 option={barChartOption}
-                style={{ height: '100%', width: '100%' }}
+                notMerge={true}
+                lazyUpdate={false}
+                style={{ height: '384px', width: '100%', minHeight: '384px' }}
                 opts={{ renderer: 'canvas' }}
               />
             ) : (
