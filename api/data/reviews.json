@@ -1,38 +1,38 @@
 [
   {
     "id": 1,
-    "reviewerId": 5,
-    "revieweeId": 1,
+    "reviewerId": 1,
+    "revieweeId": 4,
     "exchangeId": 4,
-    "rating": 3,
-    "comment": "面交的，卖家守时，物品和描述一致，推荐！",
-    "createdAt": "2024-06-07T11:18:24.798Z"
+    "rating": 4,
+    "comment": "沟通顺畅，交易过程很顺利，下次还会来。",
+    "createdAt": "2024-06-23T13:01:27.761Z"
   },
   {
     "id": 2,
-    "reviewerId": 1,
-    "revieweeId": 5,
+    "reviewerId": 4,
+    "revieweeId": 1,
     "exchangeId": 4,
-    "rating": 3,
+    "rating": 5,
     "comment": "交易非常愉快，卖家很耐心，物品描述真实。",
-    "createdAt": "2024-06-06T02:25:50.127Z"
+    "createdAt": "2025-11-29T18:26:20.969Z"
   },
   {
     "id": 3,
-    "reviewerId": 4,
-    "revieweeId": 5,
+    "reviewerId": 3,
+    "revieweeId": 2,
     "exchangeId": 10,
-    "rating": 3,
-    "comment": "沟通顺畅，交易过程很顺利，下次还会来。",
-    "createdAt": "2024-05-23T12:08:27.609Z"
+    "rating": 5,
+    "comment": "交易非常愉快，卖家很耐心，物品描述真实。",
+    "createdAt": "2024-12-16T17:45:21.438Z"
   },
   {
     "id": 4,
-    "reviewerId": 5,
-    "revieweeId": 4,
+    "reviewerId": 2,
+    "revieweeId": 3,
     "exchangeId": 10,
-    "rating": 4,
-    "comment": "信用很好的买家，付款及时，合作愉快。",
-    "createdAt": "2024-05-19T14:29:55.092Z"
+    "rating": 3,
+    "comment": "交易非常愉快，卖家很耐心，物品描述真实。",
+    "createdAt": "2026-05-26T08:11:18.323Z"
   }
 ]

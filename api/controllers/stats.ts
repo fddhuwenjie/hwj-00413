@@ -86,7 +86,7 @@ export async function getWeeklyTrend(req: Request, res: Response): Promise<void>
     const today = new Date()
     today.setHours(0, 0, 0, 0)
 
-    const weeks: { date: string; count: number }[] = []
+    const weeks: { week: string; count: number }[] = []
 
     for (let i = 6; i >= 0; i--) {
       const weekStart = new Date(today)
@@ -102,7 +102,7 @@ export async function getWeeklyTrend(req: Request, res: Response): Promise<void>
       const weekLabel = `${weekStart.getMonth() + 1}/${weekStart.getDate()}-${weekEnd.getMonth() + 1}/${weekEnd.getDate()}`
 
       weeks.push({
-        date: weekLabel,
+        week: weekLabel,
         count: weekCount,
       })
     }

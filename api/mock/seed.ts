@@ -229,12 +229,18 @@ export function generateExchanges(users: User[], items: Item[]): Exchange[] {
       : null
 
     const status = statuses[(i - 1) % statuses.length]
-    const createdAt = randomDate(new Date('2024-05-10'), new Date('2024-06-05'))
+    const today = new Date()
+    const twoMonthsAgo = new Date(today)
+    twoMonthsAgo.setDate(today.getDate() - 60)
+    const oneWeekAgo = new Date(today)
+    oneWeekAgo.setDate(today.getDate() - 7)
+
+    const createdAt = randomDate(twoMonthsAgo, oneWeekAgo)
     const confirmedAt = ['已确认', '进行中', '已完成'].includes(status)
-      ? randomDate(new Date(createdAt), new Date('2024-06-07'))
+      ? randomDate(new Date(createdAt), new Date(today))
       : null
     const completedAt = status === '已完成'
-      ? randomDate(new Date(confirmedAt!), new Date('2024-06-08'))
+      ? randomDate(new Date(confirmedAt!), new Date(today))
       : null
 
     exchanges.push({

@@ -16,7 +16,13 @@ export const statsService = {
 
   async getWeeklyTrend(): Promise<WeeklyTrend[]> {
     const result = await request<WeeklyTrend[]>('get', '/stats/weekly-trend');
-    return result.success && result.data ? result.data : [];
+    if (result.success && Array.isArray(result.data)) {
+      return result.data.map((item: any) => ({
+        week: item.week || item.date || '',
+        count: item.count || 0,
+      }));
+    }
+    return [];
   },
 
   async getPopularItems(): Promise<PopularItem[]> {
