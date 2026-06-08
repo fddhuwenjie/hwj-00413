@@ -3,6 +3,7 @@ import path from 'path'
 import { readJSON, writeJSON, getNextId, getDataPath } from '../utils/file.js'
 import type { Item, User } from '../types/index.js'
 import { CATEGORIES, CONDITIONS } from '../types/index.js'
+import { checkMatchAndNotify } from './favorites.js'
 
 interface ApiResponse<T = unknown> {
   success: boolean
@@ -194,6 +195,8 @@ export async function createItem(req: Request, res: Response): Promise<void> {
 
     items.push(newItem)
     await writeJSON(path.join(dataPath, 'items.json'), items)
+
+    checkMatchAndNotify(newItem.id)
 
     res.status(201).json({
       success: true,

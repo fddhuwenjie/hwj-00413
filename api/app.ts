@@ -16,6 +16,9 @@ import exchangesRoutes from './routes/exchanges.js'
 import messagesRoutes from './routes/messages.js'
 import reviewsRoutes from './routes/reviews.js'
 import statsRoutes from './routes/stats.js'
+import reportsRoutes from './routes/reports.js'
+import favoritesRoutes from './routes/favorites.js'
+import agreementsRoutes from './routes/agreements.js'
 import { seed } from './mock/seed.js'
 
 // load env
@@ -42,6 +45,9 @@ app.use('/api/exchanges', exchangesRoutes)
 app.use('/api/messages', messagesRoutes)
 app.use('/api/reviews', reviewsRoutes)
 app.use('/api/stats', statsRoutes)
+app.use('/api/reports', reportsRoutes)
+app.use('/api/favorites', favoritesRoutes)
+app.use('/api/agreements', agreementsRoutes)
 
 /**
  * health

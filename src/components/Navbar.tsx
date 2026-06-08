@@ -12,6 +12,11 @@ import {
   Menu,
   X,
   LogOut,
+  Heart,
+  SearchCheck,
+  Package,
+  FileText,
+  ShieldAlert,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/authStore';
@@ -163,6 +168,39 @@ export default function Navbar() {
                         >
                           <User className="w-4 h-4" />
                           个人中心
+                        </Link>
+                        <Link
+                          to="/favorites"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-text-secondary hover:bg-gray-50 hover:text-primary-500 transition-colors"
+                        >
+                          <Heart className="w-4 h-4" />
+                          我的收藏
+                        </Link>
+                        <Link
+                          to="/wanted"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-text-secondary hover:bg-gray-50 hover:text-primary-500 transition-colors"
+                        >
+                          <SearchCheck className="w-4 h-4" />
+                          我的求物
+                        </Link>
+                        <Link
+                          to="/notices"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-text-secondary hover:bg-gray-50 hover:text-primary-500 transition-colors"
+                        >
+                          <Package className="w-4 h-4" />
+                          到货提醒
+                        </Link>
+                        <div className="border-t border-gray-100 my-1" />
+                        <Link
+                          to="/reports"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-text-secondary hover:bg-gray-50 hover:text-primary-500 transition-colors"
+                        >
+                          <ShieldAlert className="w-4 h-4" />
+                          举报管理
                         </Link>
                         <button
                           onClick={handleLogout}

@@ -10,17 +10,22 @@ import {
   MessageSquare,
   Send,
   Loader2,
+  Heart,
+  Flag,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Layout from '../components/Layout';
+import ReportModal from '../components/ReportModal';
 import { itemService } from '../services/item';
 import { userService } from '../services/user';
 import { exchangeService } from '../services/exchange';
+import { favoriteService } from '../services/favorite';
 import { useAuthStore } from '../store/authStore';
 import {
   CATEGORY_COLORS,
   CONDITION_COLORS,
   DEFAULT_USER_ID,
+  ITEM_STATUS_COLORS,
 } from '../utils/constants';
 import { formatDate, getInitials, formatPrice } from '../utils/format';
 import type { Item, User } from '../types';
@@ -41,6 +46,9 @@ export default function ItemDetail() {
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [favoriteLoading, setFavoriteLoading] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -76,6 +84,50 @@ export default function ItemDetail() {
     };
     fetchUserItems();
   }, [showExchangeModal, currentUser, item?.id]);
+
+  useEffect(() => {
+    const checkFavoriteStatus = async () => {
+      if (!currentUser || !item) return;
+      try {
+        const favorited = await favoriteService.checkFavoriteStatus(currentUser.id, item.id);
+        setIsFavorited(favorited);
+      } catch (error) {
+        console.error('Failed to check favorite status:', error);
+      }
+    };
+    checkFavoriteStatus();
+  }, [currentUser, item]);
+
+  const handleToggleFavorite = async () => {
+    if (!currentUser || !item) return;
+    setFavoriteLoading(true);
+    try {
+      if (isFavorited) {
+        await favoriteService.removeFavorite(currentUser.id, item.id);
+        setIsFavorited(false);
+      } else {
+        await favoriteService.addFavorite(currentUser.id, item.id);
+        setIsFavorited(true);
+      }
+    } catch (error) {
+      console.error('Failed to toggle favorite:', error);
+      alert('操作失败，请重试');
+    } finally {
+      setFavoriteLoading(false);
+    }
+  };
+
+  const handleReportClick = () => {
+    if (!currentUser) {
+      useAuthStore.getState().login(DEFAULT_USER_ID);
+      return;
+    }
+    if (currentUser.id === item?.userId) {
+      alert('不能举报自己发布的物品');
+      return;
+    }
+    setShowReportModal(true);
+  };
 
   const handlePrevImage = () => {
     if (!item) return;
@@ -287,6 +339,14 @@ export default function ItemDetail() {
                 >
                   {item.condition}
                 </span>
+                <span
+                  className={cn(
+                    'px-3 py-1 rounded-full text-sm font-medium',
+                    ITEM_STATUS_COLORS[item.status]
+                  )}
+                >
+                  {item.status}
+                </span>
               </div>
               <h1 className="text-2xl font-bold text-text-primary mb-2">
                 {item.title}
@@ -374,11 +434,44 @@ export default function ItemDetail() {
               </div>
             </div>
 
+            <div className="flex gap-3">
+              <button
+                onClick={handleToggleFavorite}
+                disabled={favoriteLoading}
+                className={cn(
+                  'flex-1 py-4 rounded-button text-lg font-semibold flex items-center justify-center gap-2 transition-all',
+                  isFavorited
+                    ? 'bg-red-50 text-red-500 border-2 border-red-500 hover:bg-red-100'
+                    : 'bg-gray-50 text-text-secondary border-2 border-gray-200 hover:border-primary-300 hover:text-primary-500'
+                )}
+              >
+                {favoriteLoading ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <Heart className={cn('w-5 h-5', isFavorited && 'fill-current')} />
+                )}
+                {isFavorited ? '已收藏' : '收藏'}
+              </button>
+              <button
+                onClick={handleReportClick}
+                className="flex-1 py-4 rounded-button text-lg font-semibold flex items-center justify-center gap-2 bg-gray-50 text-text-secondary border-2 border-gray-200 hover:border-warning-300 hover:text-warning-500 transition-all"
+              >
+                <Flag className="w-5 h-5" />
+                举报
+              </button>
+            </div>
+
             <button
               onClick={handleExchangeClick}
-              className="w-full py-4 btn-gradient rounded-button text-lg font-semibold"
+              disabled={item.status !== '已上架'}
+              className={cn(
+                'w-full py-4 rounded-button text-lg font-semibold mt-4',
+                item.status === '已上架'
+                  ? 'btn-gradient'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              )}
             >
-              发起交换
+              {item.status === '已上架' ? '发起交换' : '物品不可交换'}
             </button>
           </div>
         </div>
@@ -508,6 +601,20 @@ export default function ItemDetail() {
             </div>
           </div>
         </div>
+      )}
+
+      {showReportModal && item && currentUser && (
+        <ReportModal
+          isOpen={showReportModal}
+          onClose={() => setShowReportModal(false)}
+          targetType="item"
+          targetId={item.id}
+          reporterId={currentUser.id}
+          onSuccess={() => {
+            setShowReportModal(false);
+            alert('举报提交成功，我们会尽快处理');
+          }}
+        />
       )}
     </Layout>
   );

@@ -35,4 +35,43 @@ export const EXCHANGE_STATUS_COLORS: Record<string, string> = {
   '已拒绝': 'bg-red-100 text-red-700',
 };
 
+export const REPORT_STATUS_COLORS: Record<string, string> = {
+  '待处理': 'bg-yellow-100 text-yellow-700',
+  '已通过': 'bg-green-100 text-green-700',
+  '已驳回': 'bg-gray-100 text-gray-700',
+};
+
+export const REPORT_TYPE_COLORS: Record<string, string> = {
+  '虚假物品': 'bg-red-100 text-red-700',
+  '诈骗行为': 'bg-orange-100 text-orange-700',
+  '违禁品': 'bg-purple-100 text-purple-700',
+};
+
+export const LOGISTICS_STATUS_COLORS: Record<string, string> = {
+  '待发货': 'bg-gray-100 text-gray-700',
+  '已发出': 'bg-blue-100 text-blue-700',
+  '运输中': 'bg-orange-100 text-orange-700',
+  '已签收': 'bg-green-100 text-green-700',
+};
+
+export const ITEM_STATUS_COLORS: Record<string, string> = {
+  '待审核': 'bg-yellow-100 text-yellow-700',
+  '已上架': 'bg-green-100 text-green-700',
+  '已下架': 'bg-gray-100 text-gray-700',
+  '已交换': 'bg-blue-100 text-blue-700',
+  '审核不通过': 'bg-red-100 text-red-700',
+  '已冻结': 'bg-purple-100 text-purple-700',
+};
+
+export const LOGISTICS_COMPANIES = [
+  '顺丰速运',
+  '京东物流',
+  '中通快递',
+  '圆通速递',
+  '申通快递',
+  '韵达快递',
+  '极兔速递',
+  '邮政EMS',
+];
+
 export const DEFAULT_USER_ID = 1;

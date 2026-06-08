@@ -10,6 +10,8 @@ import {
   ArrowRight,
   Handshake,
   Package,
+  FileText,
+  Truck,
 } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { useAuthStore } from '@/store/authStore';
@@ -274,6 +276,29 @@ export default function ExchangeDetail() {
         >
           <Star className="w-5 h-5" />
           去评价
+        </button>
+      );
+    }
+
+    if (['已确认', '进行中', '已完成'].includes(exchange.status)) {
+      buttons.push(
+        <button
+          key="agreement"
+          onClick={() => navigate(`/exchange/${exchange.id}/agreement`)}
+          className="flex-1 py-3 px-4 border border-blue-500 text-blue-500 rounded-button font-medium hover:bg-blue-50 transition-all flex items-center justify-center gap-2"
+        >
+          <FileText className="w-5 h-5" />
+          交换协议
+        </button>
+      );
+      buttons.push(
+        <button
+          key="logistics"
+          onClick={() => navigate(`/exchange/${exchange.id}/logistics`)}
+          className="flex-1 py-3 px-4 border border-green-500 text-green-500 rounded-button font-medium hover:bg-green-50 transition-all flex items-center justify-center gap-2"
+        >
+          <Truck className="w-5 h-5" />
+          物流追踪
         </button>
       );
     }

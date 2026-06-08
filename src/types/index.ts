@@ -31,12 +31,35 @@ export const ITEM_STATUSES = [
   '已下架',
   '已交换',
   '审核不通过',
+  '已冻结',
+] as const;
+
+export const REPORT_TYPES = [
+  '虚假物品',
+  '诈骗行为',
+  '违禁品',
+] as const;
+
+export const REPORT_STATUSES = [
+  '待处理',
+  '已通过',
+  '已驳回',
+] as const;
+
+export const LOGISTICS_STATUSES = [
+  '待发货',
+  '已发出',
+  '运输中',
+  '已签收',
 ] as const;
 
 export type Category = typeof CATEGORIES[number];
 export type Condition = typeof CONDITIONS[number];
 export type ExchangeStatus = typeof EXCHANGE_STATUSES[number];
 export type ItemStatus = typeof ITEM_STATUSES[number];
+export type ReportType = typeof REPORT_TYPES[number];
+export type ReportStatus = typeof REPORT_STATUSES[number];
+export type LogisticsStatus = typeof LOGISTICS_STATUSES[number];
 
 export interface User {
   id: number;
@@ -146,4 +169,87 @@ export interface PopularItem {
   title: string;
   viewCount: number;
   category: Category;
+}
+
+export interface Report {
+  id: number;
+  reporterId: number;
+  targetType: 'item' | 'exchange';
+  targetId: number;
+  type: ReportType;
+  description: string;
+  status: ReportStatus;
+  handlerId: number | null;
+  handledAt: string | null;
+  handleNote: string | null;
+  createdAt: string;
+}
+
+export interface Favorite {
+  id: number;
+  userId: number;
+  itemId: number;
+  createdAt: string;
+}
+
+export interface FavoriteWithItem extends Favorite {
+  item: Item;
+}
+
+export interface WantedItem {
+  id: number;
+  userId: number;
+  title: string;
+  description: string;
+  category?: Category;
+  keywords: string[];
+  isActive: boolean;
+  createdAt: string;
+}
+
+export interface ArrivalNotice {
+  id: number;
+  userId: number;
+  wantedItemId: number;
+  matchedItemId: number;
+  isRead: boolean;
+  createdAt: string;
+}
+
+export interface ArrivalNoticeWithItem extends ArrivalNotice {
+  matchedItem: Item;
+  wantedItem: WantedItem;
+}
+
+export interface ExchangeAgreement {
+  id: number;
+  exchangeId: number;
+  initiatorSignature: boolean;
+  responderSignature: boolean;
+  initiatorSignedAt: string | null;
+  responderSignedAt: string | null;
+  content: string;
+  createdAt: string;
+  effectiveAt: string | null;
+}
+
+export interface LogisticsRecord {
+  id: number;
+  exchangeId: number;
+  trackingNumber: string;
+  company: string;
+  status: LogisticsStatus;
+  senderId: number;
+  receiverId: number;
+  senderConfirmed: boolean;
+  receiverConfirmed: boolean;
+  timeline: LogisticsEvent[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface LogisticsEvent {
+  status: LogisticsStatus;
+  description: string;
+  time: string;
 }
