@@ -18,6 +18,7 @@ interface GetItemsQuery {
   search?: string
   page?: string
   pageSize?: string
+  userId?: string
 }
 
 interface PaginatedResponse<T> {
@@ -30,12 +31,17 @@ interface PaginatedResponse<T> {
 
 export async function getItems(req: Request, res: Response): Promise<void> {
   try {
-    const { category, condition, sort = 'latest', search, page = '1', pageSize = '10' } = req.query as GetItemsQuery
+    const { category, condition, sort = 'latest', search, page = '1', pageSize = '10', userId } = req.query as GetItemsQuery
 
     const dataPath = getDataPath()
     let items = await readJSON<Item[]>(path.join(dataPath, 'items.json'))
 
-    items = items.filter((item) => item.status === '已上架')
+    if (userId) {
+      const userIdNum = parseInt(userId, 10)
+      items = items.filter((item) => item.userId === userIdNum)
+    } else {
+      items = items.filter((item) => item.status === '已上架')
+    }
 
     if (category && CATEGORIES.includes(category as typeof CATEGORIES[number])) {
       items = items.filter((item) => item.category === category)
@@ -58,6 +64,14 @@ export async function getItems(req: Request, res: Response): Promise<void> {
       items.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     } else if (sort === 'popular') {
       items.sort((a, b) => b.viewCount + b.likeCount - (a.viewCount + a.likeCount))
+    }
+
+    if (userId) {
+      res.status(200).json({
+        success: true,
+        data: items,
+      } as ApiResponse<Item[]>)
+      return
     }
 
     const pageNum = parseInt(page, 10)

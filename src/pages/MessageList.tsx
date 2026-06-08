@@ -37,13 +37,19 @@ export default function MessageList() {
     try {
       setLoading(true);
       const data = await messageService.getConversations(currentUser.id);
-      const sorted = data.sort(
+      const validData = data.filter(
+        (c) =>
+          c?.lastMessage?.createdAt &&
+          typeof c.lastMessage.createdAt === 'string' &&
+          !isNaN(new Date(c.lastMessage.createdAt).getTime())
+      );
+      const sorted = validData.sort(
         (a, b) =>
           new Date(b.lastMessage.createdAt).getTime() -
           new Date(a.lastMessage.createdAt).getTime()
       );
       setConversations(sorted);
-      const totalUnread = sorted.reduce((sum, c) => sum + c.unreadCount, 0);
+      const totalUnread = sorted.reduce((sum, c) => sum + (c.unreadCount || 0), 0);
       setUnreadCount(totalUnread);
     } catch (error) {
       console.error('加载会话列表失败:', error);

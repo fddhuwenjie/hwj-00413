@@ -51,7 +51,7 @@ export default function Profile() {
         ]);
 
         setProfileUser(user);
-        setItems(userItems);
+        setItems(Array.isArray(userItems) ? userItems : []);
         setExchanges(userExchanges);
         setReviews(userReviews.reviews);
         setAverageRating(userReviews.averageRating);

@@ -30,6 +30,6 @@ export const itemService = {
 
   async getUserItems(userId: number): Promise<Item[]> {
     const result = await request<Item[]>('get', '/items', undefined, { userId });
-    return result.success && result.data ? (result.data as unknown as Item[]) : [];
+    return result.success && Array.isArray(result.data) ? result.data : [];
   },
 };
