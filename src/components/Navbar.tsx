@@ -23,7 +23,7 @@ const navLinks = [
   { path: '/exchange', label: '交换', icon: Repeat },
   { path: '/messages', label: '消息', icon: MessageCircle },
   { path: '/profile', label: '我的', icon: User },
-  { path: '/stats', label: '统计', icon: BarChart3 },
+  { path: '/dashboard', label: '统计', icon: BarChart3 },
 ];
 
 export default function Navbar() {
