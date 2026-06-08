@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "exchangeId": 1,
+    "senderId": 4,
+    "receiverId": 5,
+    "content": "您好，请问物品还在吗？",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-18T11:35:47.122Z"
+  },
+  {
+    "id": 2,
+    "exchangeId": 1,
+    "senderId": 5,
+    "receiverId": 4,
+    "content": "在的，您有什么想了解的？",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-18T12:35:47.122Z"
+  },
+  {
+    "id": 3,
+    "exchangeId": 1,
+    "senderId": 4,
+    "receiverId": 5,
+    "content": "可以再便宜一点吗？",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-18T13:35:47.122Z"
+  },
+  {
+    "id": 4,
+    "exchangeId": 1,
+    "senderId": 5,
+    "receiverId": 4,
+    "content": "已经是最低价了，不议价哦~",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-18T14:35:47.122Z"
+  },
+  {
+    "id": 5,
+    "exchangeId": 1,
+    "senderId": 4,
+    "receiverId": 5,
+    "content": "那好吧，我要了，怎么交易？",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-18T15:35:47.122Z"
+  },
+  {
+    "id": 6,
+    "exchangeId": 1,
+    "senderId": 5,
+    "receiverId": 4,
+    "content": "我们走平台吧，安全可靠。",
+    "type": "text",
+    "isRead": false,
+    "createdAt": "2024-05-18T16:35:47.122Z"
+  },
+  {
+    "id": 7,
+    "exchangeId": 2,
+    "senderId": 1,
+    "receiverId": 4,
+    "content": "好的，我拍下了，请尽快发货。",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-31T02:24:26.370Z"
+  },
+  {
+    "id": 8,
+    "exchangeId": 2,
+    "senderId": 4,
+    "receiverId": 1,
+    "content": "收到，明天就给您发顺丰。",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-31T03:24:26.370Z"
+  },
+  {
+    "id": 9,
+    "exchangeId": 2,
+    "senderId": 1,
+    "receiverId": 4,
+    "content": "快递单号麻烦发我一下，谢谢！",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-31T04:24:26.370Z"
+  },
+  {
+    "id": 10,
+    "exchangeId": 2,
+    "senderId": 4,
+    "receiverId": 1,
+    "content": "SF1234567890，请注意查收。",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-31T05:24:26.370Z"
+  },
+  {
+    "id": 11,
+    "exchangeId": 2,
+    "senderId": 1,
+    "receiverId": 4,
+    "content": "收到货了，东西很好，谢谢！",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-31T06:24:26.370Z"
+  },
+  {
+    "id": 12,
+    "exchangeId": 2,
+    "senderId": 4,
+    "receiverId": 1,
+    "content": "不客气，希望您满意，记得确认收货哦~",
+    "type": "text",
+    "isRead": false,
+    "createdAt": "2024-05-31T07:24:26.370Z"
+  },
+  {
+    "id": 13,
+    "exchangeId": 3,
+    "senderId": 3,
+    "receiverId": 5,
+    "content": "您好，请问物品还在吗？",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-26T07:36:23.744Z"
+  },
+  {
+    "id": 14,
+    "exchangeId": 3,
+    "senderId": 5,
+    "receiverId": 3,
+    "content": "在的，您有什么想了解的？",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-26T08:36:23.744Z"
+  },
+  {
+    "id": 15,
+    "exchangeId": 3,
+    "senderId": 3,
+    "receiverId": 5,
+    "content": "可以再便宜一点吗？",
+    "type": "text",
+    "isRead": false,
+    "createdAt": "2024-05-26T09:36:23.744Z"
+  },
+  {
+    "id": 16,
+    "exchangeId": 4,
+    "senderId": 5,
+    "receiverId": 1,
+    "content": "已经是最低价了，不议价哦~",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-17T20:06:53.598Z"
+  },
+  {
+    "id": 17,
+    "exchangeId": 4,
+    "senderId": 1,
+    "receiverId": 5,
+    "content": "那好吧，我要了，怎么交易？",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-17T21:06:53.598Z"
+  },
+  {
+    "id": 18,
+    "exchangeId": 4,
+    "senderId": 5,
+    "receiverId": 1,
+    "content": "我们走平台吧，安全可靠。",
+    "type": "text",
+    "isRead": false,
+    "createdAt": "2024-05-17T22:06:53.598Z"
+  },
+  {
+    "id": 19,
+    "exchangeId": 5,
+    "senderId": 5,
+    "receiverId": 4,
+    "content": "好的，我拍下了，请尽快发货。",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-27T05:33:16.728Z"
+  },
+  {
+    "id": 20,
+    "exchangeId": 5,
+    "senderId": 4,
+    "receiverId": 5,
+    "content": "收到，明天就给您发顺丰。",
+    "type": "text",
+    "isRead": true,
+    "createdAt": "2024-05-27T06:33:16.728Z"
+  },
+  {
+    "id": 21,
+    "exchangeId": 5,
+    "senderId": 5,
+    "receiverId": 4,
+    "content": "快递单号麻烦发我一下，谢谢！",
+    "type": "text",
+    "isRead": false,
+    "createdAt": "2024-05-27T07:33:16.728Z"
+  }
+]
